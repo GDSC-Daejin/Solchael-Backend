@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: ${DB_DRIVER}
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+
+  jpa:
+    hibernate:
+      ddl-auto: update #create update none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+    show-sql: true
+  profiles:
+    include: API-KEY
+
+#logging:
+#  level:
+#    org.springframework.transaction: DEBUG
+#    org.hibernate: DEBUG
