@@ -16,19 +16,13 @@ import java.util.List;
 public class Member {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long member_id;
+    @Column(name = "member_id")
+    private Long id;
 
     private String nickName;
     private String email;
     private String password;
 
-    @ManyToMany
-    @JoinTable(name = "member_medicine",
-            joinColumns = @JoinColumn(name = "member_id"),
-            inverseJoinColumns = @JoinColumn(name = "medicine_id"))
-    private List<Medicine> medicines = new ArrayList<>();
-
-    public void setMedicines() {
-
-    }
+    @OneToMany(mappedBy = "member")
+    private List<MemberMedicine> medicines = new ArrayList<>();
 }

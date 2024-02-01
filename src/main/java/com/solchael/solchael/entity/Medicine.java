@@ -10,15 +10,14 @@ import java.util.List;
 @Getter
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-@Table(name = "medicine")
 public class Medicine {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "medicine_id")
+
     private Long id; // 약 식별자
 
-    @ManyToMany(mappedBy = "medicines")
-    private List<Member> members = new ArrayList<>();
+    @OneToMany(mappedBy = "medicine")
+    private List<MemberMedicine> members = new ArrayList<>();
 
     @Column(columnDefinition = "VARCHAR(4000)")
     private String name; // 약 이름
