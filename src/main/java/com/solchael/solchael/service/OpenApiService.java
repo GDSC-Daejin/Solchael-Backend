@@ -72,11 +72,11 @@ public class OpenApiService {
                 String seQesitm = getTagValue("seQesitm", eElement);
                 String itemImage = getTagValue("itemImage", eElement);;
 
-                System.out.println("itemName : " + itemName);
+//                System.out.println("itemName : " + itemName);
 
-//                MedicineDto medicineDto = MedicineDto.createMedicine(itemName, useMethodQesitm, efcyQesitm, atpnQesitm, seQesitm, itemImage);
+                MedicineDto medicineDto = MedicineDto.createMedicine(itemName, useMethodQesitm, efcyQesitm, atpnQesitm, seQesitm, itemImage);
 
-//                medicineRepository.save(medicineDto.fromEntity(medicineDto));
+                medicineRepository.save(medicineDto.fromEntity(medicineDto));
             }	// if end
         }	// for end
     }
