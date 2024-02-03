@@ -53,7 +53,7 @@ public class MemberController {
     }
 
     @PostMapping("/api/v1/login")
-    public ResponseEntity<String> login(@Valid @RequestBody LoginRequest loginRequest, HttpSession httpSession) {
+    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpSession httpSession) {
         Member member = memberService.signIn(loginRequest);
 
         httpSession.setAttribute("memberEmail", member.getEmail());
