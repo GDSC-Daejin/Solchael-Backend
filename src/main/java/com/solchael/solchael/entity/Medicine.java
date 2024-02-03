@@ -13,7 +13,7 @@ import java.util.List;
 public class Medicine {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-
+    @Column(name = "medicine_id")
     private Long id; // 약 식별자
 
     @OneToMany(mappedBy = "medicine")
@@ -36,4 +36,10 @@ public class Medicine {
 
     @Column(columnDefinition = "VARCHAR(300)")
     private String itemImage; // 이미지
+
+    // 연관관계 메서드
+    public void addMembers(MemberMedicine member) {
+        members.add(member);
+        member.setMedicine(this);
+    }
 }
