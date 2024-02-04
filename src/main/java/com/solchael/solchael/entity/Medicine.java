@@ -37,6 +37,8 @@ public class Medicine {
     @Column(columnDefinition = "VARCHAR(300)")
     private String itemImage; // 이미지
 
+    private boolean store; // 편의점 판매 여부
+
     // 연관관계 메서드
     public void addMembers(MemberMedicine member) {
         members.add(member);
