@@ -1,6 +1,7 @@
 package com.solchael.solchael.repository;
 
 import com.solchael.solchael.entity.Member;
+import com.solchael.solchael.entity.MemberMedicine;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -45,4 +46,14 @@ public class MemberRepository {
             return null;
         }
     }
+
+//    // 이건 인스타 나중에 볼 게시글 저장같은 느낌
+//    public MemberMedicine saveWishList(Long id) {
+//
+//    }
+//
+//    // 이건 내가 갖고 있는 약들을 등록해 놓는 것 -> 유통기한 표시
+//    public MemberMedicine registerMedicine(Long id) {
+//
+//    }
 }

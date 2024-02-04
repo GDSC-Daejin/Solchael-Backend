@@ -1,7 +1,7 @@
 package com.solchael.solchael.service;
 
 import com.solchael.solchael.dto.MedicineDto;
-import com.solchael.solchael.dto.RecommendMedicine;
+import com.solchael.solchael.dto.MedicineResponseDto;
 import com.solchael.solchael.entity.Medicine;
 import com.solchael.solchael.repository.MedicineRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,21 +16,20 @@ public class MedicineService {
 
     private final MedicineRepository medicineRepository;
 
-    public List<MedicineDto> searchMedicine(String name) {
+    public List<MedicineResponseDto> searchMedicine(String name) {
         List<Medicine> medicineList = medicineRepository.findByName(name);
-        List<MedicineDto> medicines = new ArrayList<>();
+        List<MedicineResponseDto> medicines = new ArrayList<>();
         for (Medicine medicine : medicineList) {
-            medicines.add(MedicineDto.createMedicine(medicine.getName(), medicine.getUseMethodQesitm(),
-                    medicine.getEfcyQesitm(), medicine.getAtpnQesitm(), medicine.getSeQesitm(), medicine.getItemImage()));
+            medicines.add(MedicineResponseDto.searchMedicine(medicine.getId(), medicine.getName(), medicine.getItemImage()));
         }
         return medicines;
     }
 
-    public List<RecommendMedicine> recommendMedicine(String symptom) {
+    public List<MedicineResponseDto> recommendMedicine(String symptom) {
         List<Medicine> medicineList = medicineRepository.findBySymptom(symptom);
-        List<RecommendMedicine> recommend = new ArrayList<>();
+        List<MedicineResponseDto> recommend = new ArrayList<>();
         for (Medicine medicine : medicineList) {
-            recommend.add(new RecommendMedicine(medicine.getId(), medicine.getName(), medicine.getItemImage()));
+            recommend.add(MedicineResponseDto.searchMedicine(medicine.getId(), medicine.getName(), medicine.getItemImage()));
         }
         return recommend;
     }

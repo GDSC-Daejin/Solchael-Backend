@@ -50,5 +50,6 @@ public class MemberService {
     /**
      * 마이 페이지 관련 - 본인 약 등록, 원하는 약 저장 ( 위시 리스트 느낌 )
      */
+    
 
 }

@@ -1,7 +1,7 @@
 package com.solchael.solchael.controller;
 
 import com.solchael.solchael.dto.MedicineDto;
-import com.solchael.solchael.dto.RecommendMedicine;
+import com.solchael.solchael.dto.MedicineResponseDto;
 import com.solchael.solchael.service.MedicineService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,8 +20,8 @@ public class MedicineController {
     private final MedicineService medicineService;
 
     @GetMapping("/api/v1/search")
-    public ResponseEntity<List<MedicineDto>> searchMedicine(@RequestParam String name) {
-        List<MedicineDto> medicine = medicineService.searchMedicine(name);
+    public ResponseEntity<List<MedicineResponseDto>> searchMedicine(@RequestParam String name) {
+        List<MedicineResponseDto> medicine = medicineService.searchMedicine(name);
         return new ResponseEntity<>(medicine, HttpStatus.OK);
     }
 
@@ -32,8 +32,8 @@ public class MedicineController {
     }
 
     @GetMapping("/api/v1/recommend")
-    public ResponseEntity<List<RecommendMedicine>> getRecommend(@RequestParam String symptom) {
-        List<RecommendMedicine> recommend = medicineService.recommendMedicine(symptom);
+    public ResponseEntity<List<MedicineResponseDto>> getRecommend(@RequestParam String symptom) {
+        List<MedicineResponseDto> recommend = medicineService.recommendMedicine(symptom);
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
 }

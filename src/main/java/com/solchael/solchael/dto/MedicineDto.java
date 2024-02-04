@@ -28,14 +28,6 @@ public class MedicineDto {
         return medicineDto;
     }
 
-    public static MedicineDto recommendMedicine(String itemName, String itemImage) {
-        MedicineDto medicineDto = new MedicineDto();
-        medicineDto.setName(itemName);
-        medicineDto.setItemImage(itemImage);
-
-        return medicineDto;
-    }
-
     // DTO -> Entity
     public Medicine fromEntity(MedicineDto medicineDto) {
 

@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDateTime;
+
 import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
@@ -25,6 +27,9 @@ public class MemberMedicine {
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
+
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     // 연관관계 메서드
     public void setMember(Member member) {
