@@ -3,6 +3,7 @@ package com.solchael.solchael.controller;
 import com.solchael.solchael.dto.MedicineDto;
 import com.solchael.solchael.dto.MedicineResponseDto;
 import com.solchael.solchael.service.MedicineService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@Tag(name = "약 관련 컨트롤러")
 @RestController
 @RequiredArgsConstructor
 public class MedicineController {

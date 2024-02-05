@@ -4,6 +4,7 @@ import com.solchael.solchael.dto.LoginRequest;
 import com.solchael.solchael.dto.JoinRequest;
 import com.solchael.solchael.entity.Member;
 import com.solchael.solchael.service.MemberService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Tag(name = "사용자 관련 컨트롤러")
 @RestController
 @RequiredArgsConstructor
 public class MemberController {
@@ -33,7 +35,6 @@ public class MemberController {
         boolean isDuplicate = memberService.validateDuplicateEmail(email);
         return new ResponseEntity<>(isDuplicate, isDuplicate ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
-
 
     @PostMapping("/api/v1/join")
     public ResponseEntity create(@Valid @RequestBody JoinRequest joinRequest, BindingResult result) {
