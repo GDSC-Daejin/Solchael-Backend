@@ -47,6 +47,12 @@ public class MemberRepository {
         }
     }
 
+    public Member findById(Long id) {
+        return em.createQuery("select m from Member m where m.id = :id", Member.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
 //    // 이건 인스타 나중에 볼 게시글 저장같은 느낌
 //    public MemberMedicine saveWishList(Long id) {
 //
