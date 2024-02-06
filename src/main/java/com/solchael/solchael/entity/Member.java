@@ -23,6 +23,7 @@ public class Member {
     private String nickName;
     private String email;
     private String password;
+    private String image;
 
     @OneToMany(mappedBy = "member")
     private List<MemberMedicine> medicines = new ArrayList<>();
@@ -46,5 +47,10 @@ public class Member {
     // 닉네임 변경
     public void changeName(String nickName) {
         this.nickName = nickName;
+    }
+
+    // 프로필 다운로드 이미지 저장
+    public void uploadProfileImage(Member member, String imageUrl) {
+        this.image = imageUrl;
     }
 }
