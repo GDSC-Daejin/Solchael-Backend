@@ -25,13 +25,13 @@ public class MemberController {
     private final MemberService memberService;
 
     @GetMapping("/api/v1/user-nickName/{nickName}/exists")
-    public ResponseEntity<Boolean> duplicateNickName(@PathVariable String nickName) {
+    public ResponseEntity<Boolean> duplicateNickName(@PathVariable(name = "nickName") String nickName) {
         boolean isDuplicate = memberService.validateDuplicateNickName(nickName);
         return new ResponseEntity<>(isDuplicate, isDuplicate ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
 
     @GetMapping("/api/v1/user-email/{email}/exists")
-    public ResponseEntity<Boolean> duplicateEmail(@PathVariable String email) {
+    public ResponseEntity<Boolean> duplicateEmail(@PathVariable(name = "email") String email) {
         boolean isDuplicate = memberService.validateDuplicateEmail(email);
         return new ResponseEntity<>(isDuplicate, isDuplicate ? HttpStatus.OK : HttpStatus.CONFLICT);
     }
@@ -57,12 +57,12 @@ public class MemberController {
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest, HttpSession httpSession) {
         Member member = memberService.signIn(loginRequest);
 
-        httpSession.setAttribute("memberEmail", member.getEmail());
+        httpSession.setAttribute("memberId", member.getId());
 
         return new ResponseEntity<>(member.getEmail() + "님 로그인에 성공하였습니다.", HttpStatus.OK);
     }
 
-    @GetMapping("/api/v1/logout")
+    @PostMapping("/api/v1/logout")
     public ResponseEntity<String> logout(HttpSession httpSession) {
         httpSession.invalidate();
         return new ResponseEntity<>("로그아웃 성공", HttpStatus.OK);

@@ -22,19 +22,19 @@ public class MedicineController {
     private final MedicineService medicineService;
 
     @GetMapping("/api/v1/search")
-    public ResponseEntity<List<MedicineResponseDto>> searchMedicine(@RequestParam String name) {
+    public ResponseEntity<List<MedicineResponseDto>> searchMedicine(@RequestParam(name = "name") String name) {
         List<MedicineResponseDto> medicine = medicineService.searchMedicine(name);
         return new ResponseEntity<>(medicine, HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/medicine/{medicineId}")
-    public ResponseEntity<MedicineDto> getMedicine(@PathVariable Long medicineId) {
+    public ResponseEntity<MedicineDto> getMedicine(@PathVariable(name = "medicineId") Long medicineId) {
         MedicineDto medicine = medicineService.findById(medicineId);
         return new ResponseEntity<>(medicine, HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/recommend")
-    public ResponseEntity<List<MedicineResponseDto>> getRecommend(@RequestParam String symptom) {
+    public ResponseEntity<List<MedicineResponseDto>> getRecommend(@RequestParam(name = "symptom") String symptom) {
         List<MedicineResponseDto> recommend = medicineService.recommendMedicine(symptom);
         return new ResponseEntity<>(recommend, HttpStatus.OK);
     }
