@@ -3,6 +3,7 @@ package com.solchael.solchael.controller;
 import com.solchael.solchael.dto.MedicineDto;
 import com.solchael.solchael.dto.MedicineResponseDto;
 import com.solchael.solchael.service.MedicineService;
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,18 +22,21 @@ public class MedicineController {
 
     private final MedicineService medicineService;
 
+    @Operation(summary = "약 검색 API", description = "약 이름을 입력해주세요")
     @GetMapping("/api/v1/search")
     public ResponseEntity<List<MedicineResponseDto>> searchMedicine(@RequestParam(name = "name") String name) {
         List<MedicineResponseDto> medicine = medicineService.searchMedicine(name);
         return new ResponseEntity<>(medicine, HttpStatus.OK);
     }
 
+    @Operation(summary = "약 상세조회 API")
     @GetMapping("/api/v1/medicine/{medicineId}")
     public ResponseEntity<MedicineDto> getMedicine(@PathVariable(name = "medicineId") Long medicineId) {
         MedicineDto medicine = medicineService.findById(medicineId);
         return new ResponseEntity<>(medicine, HttpStatus.OK);
     }
 
+    @Operation(summary = "편의점 약 추천 API", description = "증상을 입력해주세요")
     @GetMapping("/api/v1/recommend")
     public ResponseEntity<List<MedicineResponseDto>> getRecommend(@RequestParam(name = "symptom") String symptom) {
         List<MedicineResponseDto> recommend = medicineService.recommendMedicine(symptom);
