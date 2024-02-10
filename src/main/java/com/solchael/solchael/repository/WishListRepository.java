@@ -26,9 +26,9 @@ public class WishListRepository {
     }
 
     public void delete(Long medicineId, Long memberId) {
-        return Optional.of(em.createQuery("delete from WishList m where m.medicine.id = :medicineId and m.member.id = :memberId")
+        em.createQuery("delete from WishList m where m.medicine.id = :medicineId and m.member.id = :memberId")
                 .setParameter("medicineId", medicineId)
                 .setParameter("memberId", memberId)
-                .executeUpdate());
+                .executeUpdate();
     }
 }
