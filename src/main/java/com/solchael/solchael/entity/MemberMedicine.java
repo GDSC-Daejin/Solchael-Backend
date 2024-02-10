@@ -1,10 +1,7 @@
 package com.solchael.solchael.entity;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -12,8 +9,8 @@ import static jakarta.persistence.FetchType.LAZY;
 
 @Entity
 @Getter
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class MemberMedicine {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

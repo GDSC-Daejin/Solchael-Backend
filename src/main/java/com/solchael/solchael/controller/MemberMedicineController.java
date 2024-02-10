@@ -62,28 +62,4 @@ public class MemberMedicineController {
 
         return new ResponseEntity<>(myInfo, HttpStatus.OK);
     }
-
-    @Operation(summary = "위시 리스트에 알약 등록 API")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "성공적으로 등록되었습니다."),
-            @ApiResponse(responseCode = "500", description = "세션이 존재하지 않습니다. 로그인 후 진행하세요")
-    })
-    @PostMapping("/api/v1/mypage/register/wish/{medicineId}")
-    public ResponseEntity getMyWish(@PathVariable(name = "medicineId") Long medicineId, HttpSession session) {
-
-        Long memberId = (Long) session.getAttribute("memberId");
-        memberMedicineService.registerWishList(medicineId, memberId);
-
-        return ResponseEntity.ok("위시 리스트에 등록 완료");
-    }
-
-    @Operation(summary = "위시 리스트 전체 조회 API")
-    @GetMapping("/api/v1/mypage/wishlists")
-    public ResponseEntity<List<WishListDto>> getWishLists(HttpSession session) {
-
-        Long memberId = (Long) session.getAttribute("memberId");
-        List<WishListDto> myWishLists = memberMedicineService.getMyWishLists(memberId);
-
-        return new ResponseEntity<>(myWishLists, HttpStatus.OK);
-    }
 }
