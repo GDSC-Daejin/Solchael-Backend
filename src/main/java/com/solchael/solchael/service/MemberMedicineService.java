@@ -1,14 +1,14 @@
 package com.solchael.solchael.service;
 
-import com.solchael.solchael.dto.MemberMedicineDto;
-import com.solchael.solchael.dto.PtpMedicineDto;
-import com.solchael.solchael.dto.NormalMedicineDto;
+import com.solchael.solchael.dto.*;
 import com.solchael.solchael.entity.Medicine;
 import com.solchael.solchael.entity.Member;
 import com.solchael.solchael.entity.MemberMedicine;
+import com.solchael.solchael.entity.WishList;
 import com.solchael.solchael.repository.MedicineRepository;
 import com.solchael.solchael.repository.MemberMedicineRepository;
 import com.solchael.solchael.repository.MemberRepository;
+import com.solchael.solchael.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,10 +25,11 @@ public class MemberMedicineService {
     private final MemberMedicineRepository memberMedicineRepository;
     private final MedicineRepository medicineRepository;
     private final MemberRepository memberRepository;
+    private final WishListRepository wishListRepository;
 
     // 사용자 약 등록 - ptp 포장이 아닌 약
     @Transactional
-    public MemberMedicineDto registerMedicine(Long medicineId, Long memberId, NormalMedicineDto normalMedicineDto) {
+    public void registerMedicine(Long medicineId, Long memberId, NormalMedicineDto normalMedicineDto) {
 
         Medicine medicine = medicineRepository.findById(medicineId);
         Member member = memberRepository.findById(memberId);
@@ -39,13 +40,11 @@ public class MemberMedicineService {
         medicine.addMembers(memberMedicine);
 
         memberMedicineRepository.save(memberMedicine);
-
-        return MemberMedicineDto.fromEntity(memberMedicine);
     }
 
     // 사용자 약 등록 - ptp 포장 된 약
     @Transactional
-    public MemberMedicineDto registerPtpMedicine(Long medicineId, Long memberId, PtpMedicineDto ptpMedicineDto) {
+    public void registerPtpMedicine(Long medicineId, Long memberId, PtpMedicineDto ptpMedicineDto) {
 
         Medicine medicine = medicineRepository.findById(medicineId);
         Member member = memberRepository.findById(memberId);
@@ -56,11 +55,9 @@ public class MemberMedicineService {
         medicine.addMembers(memberMedicine);
 
         memberMedicineRepository.save(memberMedicine);
-
-        return MemberMedicineDto.fromEntity(memberMedicine);
     }
 
-    // 내 정보 가져오기
+    // 내 알약 전체 조회
     public List<MemberMedicineDto> getMyInfo(Long id) {
         List<MemberMedicine> memberMedicines = memberMedicineRepository.findAll(id); // 사용자가 등록한 약 id, 제조일자, 유통기한을 가져옴
         List<MemberMedicineDto> memberMedicine = new ArrayList<>();
@@ -72,4 +69,29 @@ public class MemberMedicineService {
         return memberMedicine;
     }
 
+    // 위시 리스트에 알약 등록하기
+    @Transactional
+    public void registerWishList(Long medicineId, Long memberId) {
+        Medicine medicine= medicineRepository.findById(medicineId);
+        Member member = memberRepository.findById(memberId);
+
+        WishList wishList = WishList.createWishList(medicine, member);
+
+        medicine.addWishList(wishList);
+        member.addWishList(wishList);
+
+        wishListRepository.save(wishList);
+    }
+
+    // 위시 리스트 전체 조회
+    public List<WishListDto> getMyWishLists(Long id) {
+        List<WishList> lists = wishListRepository.findAll(id);
+        List<WishListDto> wishLists = new ArrayList<>();
+
+        for (WishList list : lists) {
+            wishLists.add(WishListDto.fromEntity(list));
+        }
+
+        return wishLists;
+    }
 }
