@@ -28,6 +28,9 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MemberMedicine> medicines = new ArrayList<>();
 
+    @OneToMany(mappedBy = "member")
+    private List<WishList> wishLists = new ArrayList<>();
+
     // 생성 메서드
     public static Member createMember(JoinRequest joinRequest) {
         Member member = new Member();
@@ -42,6 +45,11 @@ public class Member {
     public void addMedicines(MemberMedicine medicine) {
         medicines.add(medicine);
         medicine.setMember(this);
+    }
+
+    public void addWishList(WishList wishList) {
+        wishLists.add(wishList);
+        wishList.setMember(this);
     }
 
     // 닉네임 변경

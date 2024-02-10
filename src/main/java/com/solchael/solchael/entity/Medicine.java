@@ -19,6 +19,9 @@ public class Medicine {
     @OneToMany(mappedBy = "medicine")
     private List<MemberMedicine> members = new ArrayList<>();
 
+    @OneToMany(mappedBy = "medicine")
+    private List<WishList> wishLists = new ArrayList<>();
+
     @Column(columnDefinition = "VARCHAR(4000)")
     private String name; // 약 이름
 
@@ -43,5 +46,10 @@ public class Medicine {
     public void addMembers(MemberMedicine member) {
         members.add(member);
         member.setMedicine(this);
+    }
+
+    public  void addWishList(WishList wishList) {
+        wishLists.add(wishList);
+        wishList.setMedicine(this);
     }
 }
