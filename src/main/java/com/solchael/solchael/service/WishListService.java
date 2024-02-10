@@ -48,4 +48,13 @@ public class WishListService {
 
         return wishLists;
     }
+
+    // 위시 리스트에서 삭제
+    @Transactional
+    public void deleteMyWish(Long medicineId, Long memberId) {
+        wishListRepository.delete(medicineId, memberId);
+
+//        WishList wish = WishList.createWishList(medicineRepository.findById(medicineId), memberRepository.findById(memberId));
+//        return WishListDto.fromEntity(wish);
+    }
 }

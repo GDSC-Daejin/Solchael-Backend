@@ -10,10 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -46,5 +43,15 @@ public class WishListController {
         List<WishListDto> myWishLists = wishListService.getMyWishLists(memberId);
 
         return new ResponseEntity<>(myWishLists, HttpStatus.OK);
+    }
+
+    @Operation(summary = "위시 리스트 삭제 API")
+    @DeleteMapping("/api/v1/mypage/wishlists/{medicineId}")
+    public ResponseEntity deleteMyWish(@PathVariable(name = "medicineId") Long medicineId, HttpSession session) {
+
+        Long memberId = (Long) session.getAttribute("memberId");
+        wishListService.deleteMyWish(medicineId, memberId);
+
+        return ResponseEntity.ok("삭제 완료");
     }
 }
