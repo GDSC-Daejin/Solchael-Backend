@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter @Setter
+@Getter
+//@Setter
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 public class DrugBox {
