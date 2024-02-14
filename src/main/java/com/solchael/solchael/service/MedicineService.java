@@ -20,7 +20,7 @@ public class MedicineService {
         List<Medicine> medicineList = medicineRepository.findByName(name);
         List<MedicineResponseDto> medicines = new ArrayList<>();
         for (Medicine medicine : medicineList) {
-            medicines.add(MedicineResponseDto.searchMedicine(medicine.getId(), medicine.getName(), medicine.getItemImage()));
+            medicines.add(Medicine.searchMedicine(medicine.getId(), medicine.getName(), medicine.getItemImage()));
         }
         return medicines;
     }
@@ -29,7 +29,7 @@ public class MedicineService {
         List<Medicine> medicineList = medicineRepository.findBySymptom(symptom);
         List<MedicineResponseDto> recommend = new ArrayList<>();
         for (Medicine medicine : medicineList) {
-            recommend.add(MedicineResponseDto.searchMedicine(medicine.getId(), medicine.getName(), medicine.getItemImage()));
+            recommend.add(Medicine.searchMedicine(medicine.getId(), medicine.getName(), medicine.getItemImage()));
         }
         return recommend;
     }
