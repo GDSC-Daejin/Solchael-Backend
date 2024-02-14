@@ -5,6 +5,7 @@ import lombok.*;
 
 @Getter @Setter
 @AllArgsConstructor @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Builder
 public class MedicineDto {
 
     private String name; // 약 이름
@@ -13,20 +14,6 @@ public class MedicineDto {
     private String atpnQesitm; // 주의사항
     private String seQesitm; // 부작용
     private String itemImage; // 이미지
-
-
-    // 생성 메서드
-    public static MedicineDto createMedicine(String itemName, String useMethodQesitm, String efcyQesitm, String atpnQesitm, String seQesitm, String itemImage) {
-        MedicineDto medicineDto = new MedicineDto();
-        medicineDto.setName(itemName);
-        medicineDto.setUseMethodQesitm(useMethodQesitm);
-        medicineDto.setEfcyQesitm(efcyQesitm);
-        medicineDto.setAtpnQesitm(atpnQesitm);
-        medicineDto.setSeQesitm(seQesitm);
-        medicineDto.setItemImage(itemImage);
-
-        return medicineDto;
-    }
 
     // DTO -> Entity
     public Medicine fromEntity(MedicineDto medicineDto) {
@@ -37,6 +24,4 @@ public class MedicineDto {
                 .seQesitm(medicineDto.getSeQesitm())
                 .itemImage(medicineDto.getItemImage()).build();
     }
-
-
 }

@@ -1,9 +1,6 @@
 package com.solchael.solchael.entity;
 
-import com.solchael.solchael.dto.MedicineResponseDto;
-import com.solchael.solchael.dto.MedicineType;
-import com.solchael.solchael.dto.NormalMedicineDto;
-import com.solchael.solchael.dto.PtpMedicineDto;
+import com.solchael.solchael.dto.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -56,6 +53,17 @@ public class Medicine {
     public  void addWishList(WishList wishList) {
         wishLists.add(wishList);
         wishList.setMedicine(this);
+    }
+
+    public static MedicineDto createMedicineDto(String itemName, String useMethodQesitm, String efcyQesitm, String atpnQesitm, String seQesitm, String itemImage) {
+        return MedicineDto.builder()
+                .name(itemName)
+                .useMethodQesitm(useMethodQesitm)
+                .efcyQesitm(efcyQesitm)
+                .atpnQesitm(atpnQesitm)
+                .seQesitm(seQesitm)
+                .itemImage(itemImage)
+                .build();
     }
 
     public static MemberMedicine createNormalMedicine(Medicine medicine, Member member, NormalMedicineDto medicineDto) {

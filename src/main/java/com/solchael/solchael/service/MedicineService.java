@@ -36,7 +36,7 @@ public class MedicineService {
 
     public MedicineDto findById(Long id) {
         Medicine medicine = medicineRepository.findById(id);
-        return MedicineDto.createMedicine(medicine.getName(), medicine.getUseMethodQesitm(),
+        return Medicine.createMedicineDto(medicine.getName(), medicine.getUseMethodQesitm(),
                 medicine.getEfcyQesitm(), medicine.getAtpnQesitm(), medicine.getSeQesitm(), medicine.getItemImage());
     }
 }

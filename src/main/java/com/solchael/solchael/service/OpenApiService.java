@@ -1,6 +1,7 @@
 package com.solchael.solchael.service;
 
 import com.solchael.solchael.dto.MedicineDto;
+import com.solchael.solchael.entity.Medicine;
 import com.solchael.solchael.repository.MedicineRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -74,7 +75,7 @@ public class OpenApiService {
 
 //                System.out.println("itemName : " + itemName);
 
-                MedicineDto medicineDto = MedicineDto.createMedicine(itemName, useMethodQesitm, efcyQesitm, atpnQesitm, seQesitm, itemImage);
+                MedicineDto medicineDto = Medicine.createMedicineDto(itemName, useMethodQesitm, efcyQesitm, atpnQesitm, seQesitm, itemImage);
 
                 medicineRepository.save(medicineDto.fromEntity(medicineDto));
             }	// if end
