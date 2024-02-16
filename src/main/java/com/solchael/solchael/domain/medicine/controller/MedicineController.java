@@ -1,8 +1,10 @@
 package com.solchael.solchael.domain.medicine.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.solchael.solchael.domain.medicine.dto.MedicineDto;
 import com.solchael.solchael.domain.membermedicine.dto.MedicineResponseDto;
 import com.solchael.solchael.domain.medicine.service.MedicineService;
+import com.solchael.solchael.domain.rank.dto.SearchRankDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Set;
 
 @Tag(name = "약 관련 컨트롤러")
 @RestController
@@ -31,7 +34,7 @@ public class MedicineController {
 
     @Operation(summary = "약 상세조회 API")
     @GetMapping("/api/v1/medicine/{medicineId}")
-    public ResponseEntity<MedicineDto> getMedicine(@PathVariable(name = "medicineId") Long medicineId) {
+    public ResponseEntity<MedicineDto> getMedicine(@PathVariable(name = "medicineId") Long medicineId) throws JsonProcessingException {
         MedicineDto medicine = medicineService.findById(medicineId);
         return new ResponseEntity<>(medicine, HttpStatus.OK);
     }
@@ -41,5 +44,12 @@ public class MedicineController {
     public ResponseEntity<List<MedicineResponseDto>> getRecommend(@RequestParam(name = "symptom") String symptom) {
         List<MedicineResponseDto> recommend = medicineService.recommendMedicine(symptom);
         return new ResponseEntity<>(recommend, HttpStatus.OK);
+    }
+
+    @Operation(summary = "약 실시간 검색 순위")
+    @GetMapping("/api/v1/rank")
+    public ResponseEntity<List<SearchRankDto>> findAllRank() {
+        List<SearchRankDto> list = medicineService.findRank();
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
 }
