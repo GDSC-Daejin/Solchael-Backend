@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,6 +35,7 @@ public class SearchRankService {
             // 처음 추가되는 경우 1로 초기화
             redisTemplate.opsForZSet().add(CACHE_KEY, id, 1);
         }
+        redisTemplate.expire(CACHE_KEY, 1, TimeUnit.HOURS);
     }
 
     public List<SearchRankDto> getAllRank() {
