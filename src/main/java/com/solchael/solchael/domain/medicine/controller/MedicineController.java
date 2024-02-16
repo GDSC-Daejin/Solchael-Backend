@@ -1,6 +1,5 @@
 package com.solchael.solchael.domain.medicine.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.solchael.solchael.domain.medicine.dto.MedicineDto;
 import com.solchael.solchael.domain.membermedicine.dto.MedicineResponseDto;
 import com.solchael.solchael.domain.medicine.service.MedicineService;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Set;
 
 @Tag(name = "약 관련 컨트롤러")
 @RestController
@@ -34,7 +32,7 @@ public class MedicineController {
 
     @Operation(summary = "약 상세조회 API")
     @GetMapping("/api/v1/medicine/{medicineId}")
-    public ResponseEntity<MedicineDto> getMedicine(@PathVariable(name = "medicineId") Long medicineId) throws JsonProcessingException {
+    public ResponseEntity<MedicineDto> getMedicine(@PathVariable(name = "medicineId") Long medicineId) {
         MedicineDto medicine = medicineService.findById(medicineId);
         return new ResponseEntity<>(medicine, HttpStatus.OK);
     }
