@@ -2,6 +2,7 @@ package com.solchael.solchael.domain.membermedicine.entity;
 
 import com.solchael.solchael.domain.medicine.entity.Medicine;
 import com.solchael.solchael.domain.member.entity.Member;
+import com.solchael.solchael.domain.membermedicine.dto.MemberMedicineDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -39,5 +40,14 @@ public class MemberMedicine {
     public void setMedicine(Medicine medicine) {
         this.medicine = medicine;
         medicine.getMembers().add(this);
+    }
+
+    public MemberMedicineDto toMemberMedicineDto(MemberMedicine memberMedicine) {
+        return MemberMedicineDto.builder()
+                .id(memberMedicine.getId())
+                .name(memberMedicine.getMedicine().getName())
+                .startTime(memberMedicine.getStartTime())
+                .expiration(memberMedicine.getEndTime())
+                .build();
     }
 }

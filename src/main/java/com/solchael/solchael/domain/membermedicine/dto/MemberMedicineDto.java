@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Builder
 public class MemberMedicineDto {
 
-    private Long id;
+    private Long id; // memberMedicine PK
+    private Long medicineId; // 약 id
     private String name;
     private String image;
     private LocalDateTime startTime;
@@ -19,7 +20,8 @@ public class MemberMedicineDto {
     public static MemberMedicineDto toEntity(MemberMedicine memberMedicine) {
 
         return MemberMedicineDto.builder()
-                .id(memberMedicine.getMedicine().getId())
+                .id(memberMedicine.getId())
+                .medicineId(memberMedicine.getMedicine().getId())
                 .name(memberMedicine.getMedicine().getName())
                 .image(memberMedicine.getMedicine().getItemImage())
                 .startTime(memberMedicine.getStartTime())

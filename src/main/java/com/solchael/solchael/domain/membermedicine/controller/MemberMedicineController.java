@@ -1,7 +1,9 @@
 package com.solchael.solchael.domain.membermedicine.controller;
 
-import com.solchael.solchael.domain.medicine.dto.NormalMedicineDto;
-import com.solchael.solchael.domain.medicine.dto.PtpMedicineDto;
+import com.solchael.solchael.domain.medicine.dto.MedicineDto;
+import com.solchael.solchael.domain.medicine.dto.MedicineResponseDto;
+import com.solchael.solchael.domain.membermedicine.dto.NormalMedicineDto;
+import com.solchael.solchael.domain.membermedicine.dto.PtpMedicineDto;
 import com.solchael.solchael.domain.membermedicine.dto.MemberMedicineDto;
 import com.solchael.solchael.domain.membermedicine.service.MemberMedicineService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -53,5 +55,15 @@ public class MemberMedicineController {
         List<MemberMedicineDto> myInfo = memberMedicineService.getMyInfo(memberId);
 
         return new ResponseEntity<>(myInfo, HttpStatus.OK);
+    }
+
+    @Operation(summary = "나의 약 삭제 API")
+    @DeleteMapping("/api/v1/mypage/medicines/{id}")
+    public ResponseEntity<MemberMedicineDto> deleteMyMedicine(@PathVariable(name = "id") Long id, HttpSession session) {
+
+        Long memberId = (Long) session.getAttribute("memberId");
+        MemberMedicineDto memberMedicineDto = memberMedicineService.deleteMedicine(memberId, id);
+
+        return new ResponseEntity<>(memberMedicineDto, HttpStatus.OK);
     }
 }
