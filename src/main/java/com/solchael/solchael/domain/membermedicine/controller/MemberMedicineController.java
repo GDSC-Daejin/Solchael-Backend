@@ -23,7 +23,7 @@ public class MemberMedicineController {
 
     // ptp 포장이 아니니까 유통기한 입력 x -> 제조일자를 입력
     @Operation(summary = "일반 약 등록 API")
-    @PostMapping("/api/v1/mypage/register/{medicineId}")
+    @PostMapping("/api/v1/mypage/{medicineId}")
     public ResponseEntity addMedicine(@PathVariable("medicineId") Long medicineId, @RequestBody NormalMedicineDto normalMedicineDto, HttpSession session) {
 
         Long memberId = (Long) session.getAttribute("memberId");
@@ -35,7 +35,7 @@ public class MemberMedicineController {
 
     // ptp 포장이니까 유통기한 입력 o -> 제조일자 입력 x
     @Operation(summary = "PTP 포장 약 등록 API")
-    @PostMapping("/api/v1/mypage/register/ptp/{medicineId}")
+    @PostMapping("/api/v1/mypage/ptp/{medicineId}")
     public ResponseEntity addPtpMedicine(@PathVariable("medicineId") Long medicineId, @RequestBody PtpMedicineDto ptpMedicineDto, HttpSession session) {
 
         Long memberId = (Long) session.getAttribute("memberId");

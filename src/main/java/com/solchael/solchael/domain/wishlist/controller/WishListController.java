@@ -20,7 +20,7 @@ public class WishListController {
     private final WishListService wishListService;
 
     @Operation(summary = "위시 리스트에 알약 등록 API")
-    @PostMapping("/api/v1/mypage/register/wish/{medicineId}")
+    @PostMapping("/api/v1/mypage/wish/{medicineId}")
     public ResponseEntity getMyWish(@PathVariable(name = "medicineId") Long medicineId, HttpSession session) {
 
         Long memberId = (Long) session.getAttribute("memberId");
