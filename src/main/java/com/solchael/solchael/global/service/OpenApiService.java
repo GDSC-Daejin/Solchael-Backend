@@ -75,9 +75,9 @@ public class OpenApiService {
 
 //                System.out.println("itemName : " + itemName);
 
-                MedicineDto medicineDto = Medicine.createMedicineDto(itemName, useMethodQesitm, efcyQesitm, atpnQesitm, seQesitm, itemImage);
+                MedicineDto medicineDto = MedicineDto.createMedicineDto(itemName, useMethodQesitm, efcyQesitm, atpnQesitm, seQesitm, itemImage);
 
-                medicineRepository.save(medicineDto.fromEntity(medicineDto));
+                medicineRepository.save(medicineDto.toEntity(medicineDto));
             }	// if end
         }	// for end
     }

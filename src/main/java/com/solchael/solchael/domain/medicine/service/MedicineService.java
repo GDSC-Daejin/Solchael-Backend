@@ -43,7 +43,7 @@ public class MedicineService {
         // redis
         searchRankService.save(SearchRankDto.createRecentSearchDto(medicine));
 
-        return Medicine.createMedicineDto(medicine.getName(), medicine.getUseMethodQesitm(),
+        return MedicineDto.createMedicineDto(medicine.getName(), medicine.getUseMethodQesitm(),
                 medicine.getEfcyQesitm(), medicine.getAtpnQesitm(), medicine.getSeQesitm(), medicine.getItemImage());
     }
 

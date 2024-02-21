@@ -62,8 +62,8 @@ public class Medicine {
         wishList.setMedicine(this);
     }
 
-    public static MedicineDto createMedicineDto(String itemName, String useMethodQesitm, String efcyQesitm, String atpnQesitm, String seQesitm, String itemImage) {
-        return MedicineDto.builder()
+    public static Medicine createMedicine(String itemName, String useMethodQesitm, String efcyQesitm, String atpnQesitm, String seQesitm, String itemImage) {
+        return Medicine.builder()
                 .name(itemName)
                 .useMethodQesitm(useMethodQesitm)
                 .efcyQesitm(efcyQesitm)
@@ -73,46 +73,11 @@ public class Medicine {
                 .build();
     }
 
-    public static MemberMedicine createNormalMedicine(Medicine medicine, Member member, NormalMedicineDto medicineDto) {
-
-        return MemberMedicine.builder()
-                .member(member)
-                .medicine(medicine)
-                .startTime(medicineDto.getStartTime())
-                .endTime(setExpiration(medicineDto.getType(), medicineDto.getStartTime()))
-                .build();
-    }
-
-    public static MemberMedicine createPtpMedicine(Medicine medicine, Member member, PtpMedicineDto ptpMedicineDto) {
-        return MemberMedicine.builder()
-                .member(member)
-                .medicine(medicine)
-                .endTime(ptpMedicineDto.getExpiration())
-                .build();
-    }
-
     public static MedicineResponseDto searchMedicine(Long id, String itemName, String itemImage) {
         return MedicineResponseDto.builder()
                 .id(id)
                 .name(itemName)
                 .itemImage(itemImage)
                 .build();
-    }
-
-    /**
-     * 조제약은 1년/ PTP 는 표시된 유통기한대로/
-     * 가루약은 6개월 / 연고, 크림 6개월
-     * 시럽제는 1개월 / 점비제, 점이제, 가글 약은 1개월/
-     */
-    // 유통기한 설정
-    public static LocalDateTime setExpiration(MedicineType medicineType, LocalDateTime startTime) {
-        // 타입별로 유통기한 설정
-        if (medicineType == MedicineType.PILL) {
-            return startTime.plusYears(1);
-        } else if (medicineType == MedicineType.POWDER || medicineType ==  MedicineType.OINTMENT) {
-            return  startTime.plusMonths(6);
-        } else {
-            return startTime.plusMonths(1);
-        }
     }
 }

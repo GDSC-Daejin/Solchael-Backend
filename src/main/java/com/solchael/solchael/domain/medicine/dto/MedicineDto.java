@@ -15,8 +15,19 @@ public class MedicineDto {
     private String seQesitm; // 부작용
     private String itemImage; // 이미지
 
+    public static MedicineDto createMedicineDto(String itemName, String useMethodQesitm, String efcyQesitm, String atpnQesitm, String seQesitm, String itemImage) {
+        return MedicineDto.builder()
+                .name(itemName)
+                .useMethodQesitm(useMethodQesitm)
+                .efcyQesitm(efcyQesitm)
+                .atpnQesitm(atpnQesitm)
+                .seQesitm(seQesitm)
+                .itemImage(itemImage)
+                .build();
+    }
+
     // DTO -> Entity
-    public Medicine fromEntity(MedicineDto medicineDto) {
+    public Medicine toEntity(MedicineDto medicineDto) {
 
         return Medicine.builder()
                 .name(medicineDto.getName()).useMethodQesitm(medicineDto.getUseMethodQesitm())

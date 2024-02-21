@@ -16,7 +16,7 @@ public class MemberMedicineDto {
     private LocalDateTime startTime;
     private LocalDateTime expiration;
 
-    public static MemberMedicineDto fromEntity(MemberMedicine memberMedicine) {
+    public static MemberMedicineDto toEntity(MemberMedicine memberMedicine) {
 
         return MemberMedicineDto.builder()
                 .id(memberMedicine.getMedicine().getId())

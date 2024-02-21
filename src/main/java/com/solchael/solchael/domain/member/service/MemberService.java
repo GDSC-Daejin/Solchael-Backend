@@ -23,7 +23,7 @@ public class MemberService {
     public JoinRequest join(JoinRequest joinRequest) {
         Member member = Member.createMember(joinRequest);
         memberRepository.save(member);
-        return JoinRequest.fromEntity(member);
+        return JoinRequest.toEntity(member);
     }
 
     /**

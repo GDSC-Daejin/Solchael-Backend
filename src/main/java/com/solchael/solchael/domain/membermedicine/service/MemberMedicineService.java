@@ -37,7 +37,7 @@ public class MemberMedicineService {
         Medicine medicine = medicineRepository.findById(medicineId);
         Member member = memberRepository.findById(memberId);
 
-        MemberMedicine memberMedicine = Medicine.createNormalMedicine(medicine, member, normalMedicineDto);
+        MemberMedicine memberMedicine = NormalMedicineDto.createNormalMedicine(medicine, member, normalMedicineDto);
 
         member.addMedicines(memberMedicine);
         medicine.addMembers(memberMedicine);
@@ -52,7 +52,7 @@ public class MemberMedicineService {
         Medicine medicine = medicineRepository.findById(medicineId);
         Member member = memberRepository.findById(memberId);
 
-        MemberMedicine memberMedicine = Medicine.createPtpMedicine(medicine, member, ptpMedicineDto);
+        MemberMedicine memberMedicine = PtpMedicineDto.createPtpMedicine(medicine, member, ptpMedicineDto);
 
         member.addMedicines(memberMedicine);
         medicine.addMembers(memberMedicine);
@@ -66,7 +66,7 @@ public class MemberMedicineService {
         List<MemberMedicineDto> memberMedicine = new ArrayList<>();
 
         for (MemberMedicine memberMedicineDto : memberMedicines) {
-            memberMedicine.add(MemberMedicineDto.fromEntity(memberMedicineDto));
+            memberMedicine.add(MemberMedicineDto.toEntity(memberMedicineDto));
         }
 
         return memberMedicine;
@@ -92,7 +92,7 @@ public class MemberMedicineService {
         List<WishListDto> wishLists = new ArrayList<>();
 
         for (WishList list : lists) {
-            wishLists.add(WishListDto.fromEntity(list));
+            wishLists.add(WishListDto.toEntity(list));
         }
 
         return wishLists;

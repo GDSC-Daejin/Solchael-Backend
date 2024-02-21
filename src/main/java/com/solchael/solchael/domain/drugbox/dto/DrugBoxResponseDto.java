@@ -13,7 +13,7 @@ public class DrugBoxResponseDto {
     private Double latitude;
     private Double longitude;
 
-    public static DrugBoxResponseDto fromEntity(DrugBox drugBox) {
+    public static DrugBoxResponseDto toEntity(DrugBox drugBox) {
 
         return DrugBoxResponseDto.builder()
                 .name(drugBox.getLocationName())

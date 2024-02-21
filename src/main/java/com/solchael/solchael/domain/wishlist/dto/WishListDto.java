@@ -16,7 +16,7 @@ public class WishListDto {
     private String name;
     private String image;
 
-    public static WishListDto fromEntity(WishList wishList) {
+    public static WishListDto toEntity(WishList wishList) {
         return WishListDto.builder()
                 .medicineId(wishList.getMedicine().getId())
                 .name(wishList.getMedicine().getName())

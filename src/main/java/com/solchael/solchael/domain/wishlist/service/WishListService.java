@@ -45,7 +45,7 @@ public class WishListService {
         List<WishListDto> wishLists = new ArrayList<>();
 
         for (WishList list : lists) {
-            wishLists.add(WishListDto.fromEntity(list));
+            wishLists.add(WishListDto.toEntity(list));
         }
 
         return wishLists;
@@ -61,6 +61,6 @@ public class WishListService {
         if (rows == 0)  throw new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND);
 
 //        WishList wish = WishList.createWishList(medicineRepository.findById(medicineId), memberRepository.findById(memberId));
-//        return WishListDto.fromEntity(wish);
+//        return WishListDto.toEntity(wish);
     }
 }

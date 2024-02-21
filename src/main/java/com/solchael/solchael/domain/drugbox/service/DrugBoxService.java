@@ -30,7 +30,7 @@ public class DrugBoxService {
     public List<DrugBoxResponseDto> findAll() {
         return drugBoxRepository.findAll()
                 .stream()
-                .map(DrugBoxResponseDto::fromEntity)
+                .map(DrugBoxResponseDto::toEntity)
                 .toList();
 
     }
