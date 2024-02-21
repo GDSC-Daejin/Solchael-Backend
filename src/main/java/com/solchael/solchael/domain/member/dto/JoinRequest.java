@@ -24,7 +24,7 @@ public class JoinRequest {
     private String password;
 
     // Entity -> Dto
-    public static JoinRequest toEntity(Member member) {
+    public static JoinRequest toDto(Member member) {
         return JoinRequest.builder()
                 .nickName(member.getNickName())
                 .email(member.getEmail())
