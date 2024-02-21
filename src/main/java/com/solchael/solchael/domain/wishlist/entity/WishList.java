@@ -2,6 +2,7 @@ package com.solchael.solchael.domain.wishlist.entity;
 
 import com.solchael.solchael.domain.medicine.entity.Medicine;
 import com.solchael.solchael.domain.member.entity.Member;
+import com.solchael.solchael.domain.wishlist.dto.WishListDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -41,6 +42,15 @@ public class WishList {
         return WishList.builder()
                 .member(member)
                 .medicine(medicine)
+                .build();
+    }
+
+    public WishListDto toWishListDto(WishList wishList) {
+        return WishListDto.builder()
+                .id(wishList.getId())
+                .medicineId(wishList.getMedicine().getId())
+                .name(wishList.getMedicine().getName())
+                .image(wishList.getMedicine().getItemImage())
                 .build();
     }
 }

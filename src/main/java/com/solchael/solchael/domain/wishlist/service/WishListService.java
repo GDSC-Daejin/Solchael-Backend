@@ -53,14 +53,17 @@ public class WishListService {
 
     // 위시 리스트에서 삭제
     @Transactional
-    public void deleteMyWish(Long medicineId, Long memberId) {
+    public WishListDto deleteMyWish(Long id, Long memberId) {
 
         memberRepository.findById(memberId); // 세션 검사 먼저
 
-        int rows = wishListRepository.delete(medicineId, memberId);
+        WishList wishList = wishListRepository.findById(id);
+        int rows = wishListRepository.delete(id, memberId);
         if (rows == 0)  throw new RestApiException(CommonErrorCode.RESOURCE_NOT_FOUND);
 
 //        WishList wish = WishList.createWishList(medicineRepository.findById(medicineId), memberRepository.findById(memberId));
 //        return WishListDto.toEntity(wish);
+
+        return wishList.toWishListDto(wishList);
     }
 }

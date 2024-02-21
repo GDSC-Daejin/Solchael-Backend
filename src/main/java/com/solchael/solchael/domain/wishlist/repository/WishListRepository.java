@@ -17,15 +17,21 @@ public class WishListRepository {
         em.persist(wishList);
     }
 
+    public WishList findById(Long id) {
+        return em.createQuery("select m from WishList m where m.id = :id", WishList.class)
+                .setParameter("id", id)
+                .getSingleResult();
+    }
+
     public List<WishList> findAll(Long id) {
         return em.createQuery("select m from WishList m where m.member.id = :id", WishList.class)
                 .setParameter("id", id)
                 .getResultList();
     }
 
-    public int delete(Long medicineId, Long memberId) {
-        return em.createQuery("delete from WishList m where m.medicine.id = :medicineId and m.member.id = :memberId")
-                .setParameter("medicineId", medicineId)
+    public int delete(Long id, Long memberId) {
+        return em.createQuery("delete from WishList m where m.id = :id and m.member.id = :memberId")
+                .setParameter("id", id)
                 .setParameter("memberId", memberId)
                 .executeUpdate();
     }

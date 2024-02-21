@@ -12,12 +12,14 @@ import lombok.*;
 @Builder
 public class WishListDto {
 
+    private Long id;
     private Long medicineId;
     private String name;
     private String image;
 
     public static WishListDto toEntity(WishList wishList) {
         return WishListDto.builder()
+                .id(wishList.getId())
                 .medicineId(wishList.getMedicine().getId())
                 .name(wishList.getMedicine().getName())
                 .image(wishList.getMedicine().getItemImage())

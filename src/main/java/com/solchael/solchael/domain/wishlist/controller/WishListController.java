@@ -40,12 +40,12 @@ public class WishListController {
     }
 
     @Operation(summary = "위시 리스트 삭제 API")
-    @DeleteMapping("/api/v1/mypage/wishlists/{medicineId}")
-    public ResponseEntity deleteMyWish(@PathVariable(name = "medicineId") Long medicineId, HttpSession session) {
+    @DeleteMapping("/api/v1/mypage/wishlists/{id}")
+    public ResponseEntity<WishListDto> deleteMyWish(@PathVariable(name = "id") Long id, HttpSession session) {
 
         Long memberId = (Long) session.getAttribute("memberId");
-        wishListService.deleteMyWish(medicineId, memberId);
+        WishListDto wishListDto = wishListService.deleteMyWish(id, memberId);
 
-        return ResponseEntity.ok("삭제 완료");
+        return new ResponseEntity<>(wishListDto, HttpStatus.OK);
     }
 }
