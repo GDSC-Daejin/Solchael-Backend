@@ -71,30 +71,4 @@ public class MemberMedicineService {
 
         return memberMedicine;
     }
-
-    // 위시 리스트에 알약 등록하기
-    @Transactional
-    public void registerWishList(Long medicineId, Long memberId) {
-        Medicine medicine= medicineRepository.findById(medicineId);
-        Member member = memberRepository.findById(memberId);
-
-        WishList wishList = WishList.createWishList(medicine, member);
-
-        medicine.addWishList(wishList);
-        member.addWishList(wishList);
-
-        wishListRepository.save(wishList);
-    }
-
-    // 위시 리스트 전체 조회
-    public List<WishListDto> getMyWishLists(Long id) {
-        List<WishList> lists = wishListRepository.findAll(id);
-        List<WishListDto> wishLists = new ArrayList<>();
-
-        for (WishList list : lists) {
-            wishLists.add(WishListDto.toEntity(list));
-        }
-
-        return wishLists;
-    }
 }
